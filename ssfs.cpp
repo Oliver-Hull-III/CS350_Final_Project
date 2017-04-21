@@ -18,10 +18,96 @@
 
 using namespace std;
 
-int main(char **argv, int argc){
-    
+void split(string in, vector<string> out){
+	stringstream stream(in);
+	
+	string tempString;
+	
+	while(getline(stream,tempString,' ')) {
+		out.push_back(tempString);
+	}
+
+}
+void parseInputFile(fstream input){
+	
+	
+	
+	string command;
+	vector <string> command_split;
+	
+	
+	while(!input.eof()){
+		
+		
+		string ssfsFName, unixFName;
+		
+		int startByte, numByte;
+		
+		char ch;
+		
+		
+		getline(input, command);
+		
+		split(command,command_split);
+		
+		if(command_split[0] == "CREATE"){
+			
+			ssfsFName = command_split[1];
+			
+			
+			
+		}
+		else if(command_split[0] == "IMPORT"){
+			ssfsFName = command_split[1];
+			unixFName = command_split[2];
+			
+			
+			
+			
+			
+		}
+		else if(command_split[0] == "CAT"){
+			ssfsFName = command_split[1];
+			
+		}
+		else if(command_split[0] == "DELETE"){
+			ssfsFName = command_split[1];
+			
+		}
+		else if(command_split[0] == "WRITE"){
+			ssfsFName = command_split[1];
+			ch = command_split[2][0];
+			startByte = atoi(command_split[3].c_str());
+			numByte = atoi(command_split[4].c_str());
+		}
+		else if(command_split[0] == "READ"){
+			ssfsFName = command_split[1];
+			startByte = atoi(command_split[3].c_str());
+			numByte = atoi(command_split[4].c_str());
+			
+			
+			
+		}
+		else if(command_split[0] == "LIST"){
+			
+			
+		}
+		else if(command_split[0] == "SHUTDOWN"){
+			
+		}
+		
+		
+		command_split.clear();
+	}
+}
+
+
+
+
+int main(int argc, char **argv){
+	
     fstream disk, input1;    // input2, input3, input4;   we'll work with one input file for now
-    
+	
     disk.open(argv[1],fstream::in | fstream::out);
 
     input1.open(argv[2], fstream::in);
@@ -37,63 +123,12 @@ int main(char **argv, int argc){
     }
 */
     parseInputFile(input1);
+	
+	
+	return 0;
 
 }
 
-vector<string> split(string in, string<vector> out){
-    stringstream stream(in);
-    
-    string tempString;
-    
-    while(getline(stream,tempString,' ')) {
-        out.push_back(tempString);
-    }
-    
-}
 
-int parseInputFile(fstream input){
-    
-    
-    
-    string command;
-    vector <string> splitCommand;
-    
-    
-    while(!input.eof()){
-        
-        
 
-        getline(input, command);
-        
-        split(command,splitCommand);
-        
-        if(splitCommand[0] == "CREATE"){
-            
-        }
-        else if(splitCommand[0] == "IMPORT"){
-            
-        }
-        else if(splitCommand[0] == "CAT"){
-            
-        }
-        else if(splitCommand[0] == "DELETE"){
-            
-        }
-        else if(splitCommand[0] == "WRITE"){
-            
-        }
-        else if(splitCommand[0] == "READ"){
-            
-        }
-        else if(splitCommand[0] == "LIST"){
-            
-        }
-        else if(splitCommand[0] == "SHUTDOWN"){
-            
-        }
-        
 
-        splitCommand.clear();
-    }
-
-}
