@@ -12,7 +12,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
-
+#include <stdlib.h>
 
 
 
@@ -28,9 +28,10 @@ void split(string in, vector<string> out){
 	}
 
 }
-void parseInputFile(fstream input){
+void parseInputFile(char* fName){
 	
-	
+	ifstream input;
+        input.open(fName, fstream::in);
 	
 	string command;
 	vector <string> command_split;
@@ -106,11 +107,10 @@ void parseInputFile(fstream input){
 
 int main(int argc, char **argv){
 	
-    fstream disk, input1;    // input2, input3, input4;   we'll work with one input file for now
+    ifstream disk, input1;    // input2, input3, input4;   we'll work with one input file for now
 	
     disk.open(argv[1],fstream::in | fstream::out);
 
-    input1.open(argv[2], fstream::in);
 /*
     if(argc > 3){
         input2.open(argv[3], fstream::in);
@@ -122,7 +122,7 @@ int main(int argc, char **argv){
         input4.open(argv[5], fstream::in);
     }
 */
-    parseInputFile(input1);
+    parseInputFile(argv[2]);
 	
 	
 	return 0;
