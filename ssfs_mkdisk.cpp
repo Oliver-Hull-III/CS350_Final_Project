@@ -29,7 +29,12 @@ int main(int argc, char** argv){
 
 	ofs.seekp((numBlocks * blockSize * 8) - 1);   // sets file size. might have to remove * 8
 	ofs.write("", 1);
-	
+    
+    if (blockSize < 128 )
+        perror ("Block Size cannot be less than 128 bytes.");
+    else if (blockSize > 512)
+        perror ("Block Size cannot be greater than 512 bytes.");
+    
 	//TODO
 	// write out Superblock (first 1 or 2 block)
 	// block size, numBlocks, boolean hasFiles
