@@ -10,13 +10,14 @@
 #define iNode_hpp
 
 #include <stdio.h>
+#include <string>
 
 class iNode{
     public:
         iNode();
     
     private:
-        string fileName;
+		std::string fileName;
         int fSize;
         int blockAddressTable[12];
         int indBlock;

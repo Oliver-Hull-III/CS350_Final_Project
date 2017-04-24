@@ -19,6 +19,9 @@ fileSystem::fileSystem(string diskName){
 void fileSystem::create(string ssfsFName){
 	
 }
+void fileSystem::import(string ssfsFName, string unixFName){
+	
+}
 
 void fileSystem::cat(string ssfsFName){
 	
@@ -38,7 +41,7 @@ void fileSystem::write(string ssfsFName, char ch, int startByte, int numBytes){
 	
 }
 
-void fileSystem::void read(string ssfsFName, int startByte, int numBytes){
+void fileSystem::read(string ssfsFName, int startByte, int numBytes){
 	
 }
 
