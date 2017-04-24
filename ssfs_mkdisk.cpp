@@ -34,6 +34,4 @@ int main(int argc, char** argv){
 	// write out Superblock (first 1 or 2 block)
 	// block size, numBlocks, boolean hasFiles
 	
-	
-	
 }
