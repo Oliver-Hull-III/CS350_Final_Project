@@ -124,7 +124,7 @@ void parseInputFile(char* fName, fileSystem fileSys){
 
 int main(int argc, char **argv){
 	
-    ifstream disk, input1;    // input2, input3, input4;   we'll work with one input file for now
+    ifstream input1;    // input2, input3, input4;   we'll work with one input file for now
 
 	
 	//make fileSystem object
@@ -134,6 +134,7 @@ int main(int argc, char **argv){
 /*
     if(argc > 3){
         input2.open(argv[3], fstream::in);
+		create thread
  
     }
     if(argc > 4){

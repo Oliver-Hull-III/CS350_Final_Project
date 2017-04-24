@@ -27,10 +27,12 @@ int main(int argc, char** argv){
 		
 	std::ofstream ofs(argv[3], std::ios::binary | std::ios::out);
 
-	ofs.seekp((numBlocks * blockSize * 8) - 1);   // maybe remove * 8
+	ofs.seekp((numBlocks * blockSize * 8) - 1);   // sets file size. might have to remove * 8
 	ofs.write("", 1);
 	
-	
+	//TODO
+	// write out Superblock (first 1 or 2 block)
+	// block size, numBlocks, boolean hasFiles
 	
 	
 	
