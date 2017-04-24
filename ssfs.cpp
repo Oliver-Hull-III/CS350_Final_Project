@@ -1,5 +1,5 @@
 //
-//  main.cpp
+//  ssfs.cpp
 //  
 //
 //  Created by oliver on 4/20/17.
@@ -13,6 +13,7 @@
 #include <string>
 #include <sstream>
 #include <stdlib.h>
+#include "fileSystem.hpp"
 
 
 
@@ -28,7 +29,7 @@ void split(string in, vector<string> out){
 	}
 
 }
-void parseInputFile(char* fName){
+void parseInputFile(char* fName, fileSystem fileSys){
 	
 	ifstream input;
         input.open(fName, fstream::in);
@@ -37,12 +38,13 @@ void parseInputFile(char* fName){
 	vector <string> command_split;
 	
 	
+	
 	while(!input.eof()){
 		
 		
 		string ssfsFName, unixFName;
 		
-		int startByte, numByte;
+		int startByte, numBytes;
 		
 		char ch;
 		
@@ -55,6 +57,8 @@ void parseInputFile(char* fName){
 			
 			ssfsFName = command_split[1];
 			
+			fileSys.create(ssfsFName);
+			
 			
 			
 		}
@@ -63,37 +67,50 @@ void parseInputFile(char* fName){
 			unixFName = command_split[2];
 			
 			
-			
+			fileSys.import(ssfsFName,unixFName);
 			
 			
 		}
 		else if(command_split[0] == "CAT"){
 			ssfsFName = command_split[1];
 			
+			fileSys.cat(ssfsFName);
+			
+			
 		}
 		else if(command_split[0] == "DELETE"){
 			ssfsFName = command_split[1];
+			fileSys.del(ssfsFName);
+
 			
 		}
 		else if(command_split[0] == "WRITE"){
 			ssfsFName = command_split[1];
 			ch = command_split[2][0];
 			startByte = atoi(command_split[3].c_str());
-			numByte = atoi(command_split[4].c_str());
+			numBytes = atoi(command_split[4].c_str());
+			
+			fileSys.write(ssfsFName, ch, startByte, numBytes);
+			
+
 		}
 		else if(command_split[0] == "READ"){
 			ssfsFName = command_split[1];
 			startByte = atoi(command_split[3].c_str());
-			numByte = atoi(command_split[4].c_str());
+			numBytes = atoi(command_split[4].c_str());
 			
+			fileSys.read(ssfsFName, startByte, numBytes);
 			
 			
 		}
 		else if(command_split[0] == "LIST"){
+			fileSys.list();
 			
 			
 		}
 		else if(command_split[0] == "SHUTDOWN"){
+			fileSys.shutdown();
+			
 			
 		}
 		
@@ -108,12 +125,16 @@ void parseInputFile(char* fName){
 int main(int argc, char **argv){
 	
     ifstream disk, input1;    // input2, input3, input4;   we'll work with one input file for now
+
 	
-    disk.open(argv[1],fstream::in | fstream::out);
+	//make fileSystem object
+	fileSystem fileSys(argv[1]);
+	
 
 /*
     if(argc > 3){
         input2.open(argv[3], fstream::in);
+ 
     }
     if(argc > 4){
         input3.open(argv[4], fstream::in);
@@ -122,7 +143,7 @@ int main(int argc, char **argv){
         input4.open(argv[5], fstream::in);
     }
 */
-    parseInputFile(argv[2]);
+    parseInputFile(argv[2],fileSys);
 	
 	
 	return 0;
