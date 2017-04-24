@@ -1,5 +1,6 @@
-all: ssfs ssfs_mkdisk iNode fileSystem
+# CS350 - Program 5
 
+all: ssfs ssfs_mkdisk
 
 ssfs_mkdisk: ssfs_mkdisk.o
 	g++ -o ssfs_mkdisk ssfs_mkdisk.o
@@ -8,26 +9,15 @@ ssfs_mkdisk.o: ssfs_mkdisk.cpp
 	g++ -c ssfs_mkdisk.cpp
 
 
-ssfs: ssfs.o
-	g++ -o ssfs ssfs.o
+ssfs: ssfs.o fileSystem.o iNode.o
+	g++ -g  ssfs.o fileSystem.o iNode.o -o ssfs
 
 ssfs.o: ssfs.cpp
-	g++ -c ssfs.cpp
-
-
-iNode: iNode.o
-	g++ -o iNode iNode.o
-
-
-iNode.o: iNode.cpp
-	g++ -c iNode.cpp
-
-
-fileSystem: fileSystem.o
-	g++ -o fileSystem fileSystem.o
-
-fileSystem.o: fileSystem.cpp
-	g++ -c fileSystem.cpp
+	g++ -std=c++11 -g -c ssfs.cpp
+fileSystem.o:	fileSystem.cpp
+	g++ -std=c++11 -g -c fileSystem.cpp
+iNode.o:	iNode.cpp
+	g++ -std=c++11 -g -c iNode.cpp
 
 clean:
-	rm -f *.o ssfs ssfs_mkdisk iNode fileSystem
+	rm -f *.o ssfs ssfs_mkdisk
