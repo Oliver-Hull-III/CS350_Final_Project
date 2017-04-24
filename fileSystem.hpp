@@ -10,7 +10,9 @@
 #define fileSystem_hpp
 
 #include <stdio.h>
-#include <bitset>
+#include <vector>
+#include <string>
+
 class fileSystem{
 
 
@@ -30,7 +32,7 @@ class fileSystem{
 		void shutdown();
 	
 	private:
-		//std::bitset freeList();
+		std::vector<bool> freeList;
 	
 	
 	

@@ -17,12 +17,12 @@ int main(int argc, char** argv){
 	
 	int numBlocks, blockSize;
 	
-	string fName;
+	std::string fName;
 	
 	if(argc > 3)
 		fName = argv[3];
 	else
-		fName = "DISK"
+		fName = "DISK";
 	
 		
 	std::ofstream ofs(argv[3], std::ios::binary | std::ios::out);
