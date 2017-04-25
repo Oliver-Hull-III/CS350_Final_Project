@@ -17,11 +17,11 @@ class iNode{
         iNode();
     
     private:
-		std::string fileName;
         int fSize;
         int blockAddressTable[12];
         int indBlock;
         int doubleIndBlock;
+				char fileName[32];
 };
 
 
