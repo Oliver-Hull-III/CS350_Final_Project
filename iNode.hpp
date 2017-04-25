@@ -17,11 +17,12 @@ class iNode{
         iNode();
     
     private:
+				// fileName is char arry of size 32 bytes, as specified in Program5 instructions
         int fSize;
         int blockAddressTable[12];
         int indBlock;
         int doubleIndBlock;
-				char fileName[32];
+				char fileName[32];	
 };
 
 
