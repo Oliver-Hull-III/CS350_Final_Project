@@ -9,4 +9,9 @@ git status to see what is being tracked, what is not tracked, what is a new file
 
 git add <filename> to add the file to the "staging area" ...pretty much means that it's ready to be committed
 
-git commit 
+git commit updates to your local repository 
+
+git push updates to the remote repository
+
+
+git pull takes the file from the remote repository down to your computer
