@@ -15,8 +15,6 @@
 #include <stdlib.h>
 #include "fileSystem.hpp"
 
-
-
 using namespace std;
 
 void split(string in, vector<string> out){
