@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <vector>
 #include <string>
+#include "iNode.hpp"
 
 class fileSystem{
 
@@ -19,7 +20,7 @@ class fileSystem{
 	public:
 		//Constructors
 		fileSystem(std::string diskName);
-	
+		std::vector<iNode> iNodeList;
 	
 	
 		void create(std::string ssfsFName);

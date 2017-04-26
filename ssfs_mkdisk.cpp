@@ -15,6 +15,54 @@
 
 using namespace std;
 
+struct Superblock{
+	int numBlocks;
+	int blockSize;
+	int offset; // in bytes
+	int hasFiles;
+	
+};
+
+
+
+/*
+ _______________________________
+|								|
+|			Superblock			|
+|  								|
+|	int:numBlocks				|	<-----  size: 1 block
+|	int:blockSize				|
+|	int:offset					|
+|	int:hasFiles				|
+|_______________________________|
+|								|
+|			iNodeList			|   <----- size: 256 blocks
+|								|
+|_______________________________|
+|								|
+|			freeBlockList		|   <----- size: 1 block
+|_______________________________|
+|								|
+|			freeiNodeList		|   <----- size: 1 block
+|								|
+|-------------------------------|	<-------
+|								|			|
+|								|			|_______ offset points here
+|								|
+|								|
+|								|
+|			mainMemory			|	<----- size: numBlocks*blockSize bytes
+|								|
+|								|
+|								|
+|								|
+|								|
+|								|
+|_______________________________|
+ 
+ 
+ */
+
 int main(int argc, char** argv){
 	
 	int numBlocks, blockSize;	
@@ -42,13 +90,34 @@ int main(int argc, char** argv){
 	std::ifstream ifs;
 	ofs.open(argv[3], std::ios::binary | std::ios::out);
 	ifs.open(argv[3], std::ios:: binary | std::ios::in);
+	
+	
+	
+	//maybe change to strings
+
+	Superblock sb;
+	
+	sb.hasFiles = 0;
+	sb.numBlocks = numBlocks;
+	sb.blockSize = blockSize;
+	sb.offset = 258 * blockSize;
+
+	ofs.write(reinterpret_cast<char*>(&sb), sizeof(Superblock));
+
+	
+	
+	
 
 	// junk char array just holds a z, going to fill the disk file with a bunch of z's to start
+
 	char junk[1] = {'z'};
 	char junk_2[1] = {'x'};
 	char read_buf[1];
 	// fill entire file with the char z
-	for (int i = 0; i < numBlocks * blockSize; i++) {
+	
+	
+	
+	for (int i = blockSize; i < (numBlocks + 258) * blockSize; i++) {
 		if( i < (numBlocks * blockSize -1)) {
 			// fill whole file with z's
 			ofs.seekp(i);
