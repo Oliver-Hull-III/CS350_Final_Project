@@ -15,6 +15,10 @@
 class iNode{
     public:
         iNode();
+		iNode(const iNode &other);
+
+		iNode(std::string);
+
         iNode(int, int[12], int, int, char[32]);
     
     private:

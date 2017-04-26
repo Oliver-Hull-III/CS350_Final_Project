@@ -14,7 +14,15 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include "iNode.hpp"
+
+struct iNode{
+	char fileName[32] = "";
+	int fSize = 0;
+	int blockAddressTable[12] = {-1};
+	int indBlock = -1;
+	int doubleIndBlock = -1;
+};
+
 
 class fileSystem{
 
@@ -22,7 +30,6 @@ class fileSystem{
 	public:
 		//Constructors
 		fileSystem(std::string diskName);
-		std::vector<iNode> iNodeList;
 	
 	
 		void create(std::string ssfsFName);
@@ -35,11 +42,24 @@ class fileSystem{
 		void shutdown();
 	
 	private:
-		std::vector<bool> freeBlockList;
-		std::vector<bool> freeiNodeList;	
-		std::vector<iNode> iNodeList;
+	
+		int numBlocks;
+		int blockSize;
+		int offset;
+	
+		std::ifstream diskIn;
+		std::ofstream diskOut;
+
 	
 	
+	
+		bool *freeBlockList;
+		bool freeiNodeList[256] = {0};
+		iNode iNodeList[256];
+	
+	
+	
+
 };
 
 

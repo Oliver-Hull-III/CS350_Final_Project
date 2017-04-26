@@ -27,14 +27,17 @@ void split(string in, vector<string> out){
 	}
 
 }
-void parseInputFile(char* fName, fileSystem fileSys){
+void parseInputFile(char* diskFile, char * instructionFile){
 	
 	ifstream input;
-        input.open(fName, fstream::in);
+        input.open(instructionFile, fstream::in);
 	
 	string command;
 	vector <string> command_split;
 	
+	
+	
+	fileSystem fileSys(diskFile);
 	
 	
 	while(!input.eof()){
@@ -54,6 +57,7 @@ void parseInputFile(char* fName, fileSystem fileSys){
 		if(command_split[0] == "CREATE"){
 			
 			ssfsFName = command_split[1];
+			
 			
 			fileSys.create(ssfsFName);
 			
@@ -126,7 +130,7 @@ int main(int argc, char **argv){
 
 	
 	//make fileSystem object
-	fileSystem fileSys(argv[1]);
+
 
 /*
     if(argc > 3){
@@ -141,7 +145,7 @@ int main(int argc, char **argv){
         input4.open(argv[5], fstream::in);
     }
 */
-    parseInputFile(argv[2],fileSys);
+    parseInputFile(argv[1],argv[2]);
 	
 	
 	return 0;

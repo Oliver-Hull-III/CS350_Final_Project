@@ -61,6 +61,17 @@ struct Superblock{
 |_______________________________|
  
  
+ 
+ _______________________________
+|				iNode			|
+|	string:fName				|
+|	int:directBlockPointer		|
+|								|
+|								|
+|								|
+|								|
+|								|
+|_______________________________|
  */
 
 int main(int argc, char** argv){

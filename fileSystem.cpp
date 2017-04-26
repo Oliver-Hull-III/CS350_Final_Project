@@ -26,20 +26,65 @@ struct Superblock{
 
 
 fileSystem::fileSystem(string diskName){
-	ifstream ifs;	
-	ifs.open(diskName, ios::in);
+
+	
+	
+	diskIn.open(diskName, ios::in);
+	diskOut.open(diskName, ios::out);
+
 	Superblock sb;
 
-	ifs.read(reinterpret_cast<char*>(&sb),sizeof(Superblock));
+	diskIn.read(reinterpret_cast<char*>(&sb),sizeof(Superblock));
 
+	blockSize = sb.blockSize;
+	numBlocks = sb.numBlocks;
+	offset = sb.offset;
+	
+	freeBlockList = new bool [numBlocks];
+	
+	
+	
+	
+	
 	if(sb.hasFiles){
 		//look through the disk and read data into our class
+	}
+	else{
+		
+		
 	}
 }
 
 void fileSystem::create(string ssfsFName){
 	
+	//TODO: check if file already exists
+	
+	
+	for(int i = 0; i<256; i++){
+		if(freeiNodeList[i] == 0){
+			freeiNodeList[i] = 1;
+			for(int j = 0; j<ssfsFName.length(); j++)
+				iNodeList[i].fileName[j] = ssfsFName[j];
+
+			//update iNodeList on disk
+
+			diskOut.seekp(blockSize * (i+1));
+			diskOut.write(reinterpret_cast<char*>(&iNodeList[i]),sizeof(iNode));
+		
+			//TODO: update iNodeFreeList
+			
+			break;
+		}
+		
+	}
+	
+	
+	
 }
+
+
+
+
 void fileSystem::import(string ssfsFName, string unixFName){
 	
 }
@@ -69,6 +114,7 @@ void fileSystem::read(string ssfsFName, int startByte, int numBytes){
 
 string fileSystem::list(){
 	
+	return "placeholder";
 }
 
 void fileSystem::shutdown(){
