@@ -10,6 +10,8 @@
 #define fileSystem_hpp
 
 #include <stdio.h>
+#include <iostream>
+#include <fstream>
 #include <vector>
 #include <string>
 #include "iNode.hpp"
@@ -33,9 +35,9 @@ class fileSystem{
 		void shutdown();
 	
 	private:
-		std::vector<bool> freeList;
-	
-	
+		std::vector<bool> freeBlockList;
+		std::vector<bool> freeiNodeList;	
+		std::vector<iNode> iNodeList;
 	
 	
 };

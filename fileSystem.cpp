@@ -9,11 +9,32 @@
 #include "fileSystem.hpp"
 using namespace std;
 
+
+
+
+//DUPLICATE CODE REMOVE LATER
+
+
+struct Superblock{
+	int numBlocks;
+	int blockSize;
+	int offset; // in bytes
+	int hasFiles;
+	
+};
+
+
+
 fileSystem::fileSystem(string diskName){
-	// need to check if disk is empty or not. if its empty we initialize it.
-	//if not, we load info into our data structures.
-	
-	
+	ifstream ifs;	
+	ifs.open(diskName, ios::in);
+	Superblock sb;
+
+	ifs.read(reinterpret_cast<char*>(&sb),sizeof(Superblock));
+
+	if(sb.hasFiles){
+		//look through the disk and read data into our class
+	}
 }
 
 void fileSystem::create(string ssfsFName){
