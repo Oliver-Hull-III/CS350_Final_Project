@@ -1,7 +1,7 @@
 Mark is initing, cloning git statusing and push pulling for the first time. Now I'm modifying this text file!
 
 
-git init used to create the git repository on your machine
+ONLY THE VERY VERY FIRST TIME git init used to create the git repository on your machine
 
 git clone <url> to pull all the data from the url's repository
 

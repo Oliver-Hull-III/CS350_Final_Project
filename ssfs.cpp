@@ -127,7 +127,6 @@ int main(int argc, char **argv){
 	
 	//make fileSystem object
 	fileSystem fileSys(argv[1]);
-	
 
 /*
     if(argc > 3){
