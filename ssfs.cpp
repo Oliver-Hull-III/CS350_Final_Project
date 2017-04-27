@@ -30,7 +30,7 @@ void split(string in, vector<string> out){
 void parseInputFile(char* diskFile, char * instructionFile){
 	
 	ifstream input;
-        input.open(instructionFile, ios::binary | ios::in);
+        input.open(instructionFile, fstream::in);
 	
 	string command;
 	vector <string> command_split;
@@ -119,7 +119,6 @@ void parseInputFile(char* diskFile, char * instructionFile){
 		
 		command_split.clear();
 	}
-	input.close();
 }
 
 
@@ -127,21 +126,27 @@ void parseInputFile(char* diskFile, char * instructionFile){
 
 int main(int argc, char **argv){
 	
+    ifstream input1;    // input2, input3, input4;   we'll work with one input file for now
+
+	
+	//make fileSystem object
 
 
+/*
+    if(argc > 3){
+        input2.open(argv[3], fstream::in);
+		create thread
+ 
+    }
+    if(argc > 4){
+        input3.open(argv[4], fstream::in);
+    }
+    if(argc > 3){
+        input4.open(argv[5], fstream::in);
+    }
+*/
+    parseInputFile(argv[1],argv[2]);
 	
-	fileSystem fs(argv[1]);
-	
-	fs.create("testfile.txt");
-	
-	//fs.import("testfile.txt","unix_file.txt");
-	
-	
-	
-	
-
- //   parseInputFile(argv[1],argv[2]);
-
 	
 	return 0;
 
