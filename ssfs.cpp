@@ -19,18 +19,19 @@ using namespace std;
 
 void split(string in, vector<string> out){
 	stringstream stream(in);
-	
 	string tempString;
 	
 	while(getline(stream,tempString,' ')) {
 		out.push_back(tempString);
 	}
+	
+	cerr << "Here" << endl;
 
 }
 void parseInputFile(char* diskName, char* fName){
 	
 	ifstream input;
-        input.open(fName, fstream::in);
+  input.open(fName, fstream::in);
 	
 	string command;
 	vector <string> command_split;
@@ -38,7 +39,6 @@ void parseInputFile(char* diskName, char* fName){
 	fileSystem fileSys(diskName);
 	
 	while(!input.eof()){
-		
 		
 		string ssfsFName, unixFName;
 		
@@ -55,10 +55,7 @@ void parseInputFile(char* diskName, char* fName){
 			
 			ssfsFName = command_split[1];
 			
-			fileSys.create(ssfsFName);
-			
-			
-			
+			fileSys.create(ssfsFName);	
 		}
 		else if(command_split[0] == "IMPORT"){
 			ssfsFName = command_split[1];
@@ -110,15 +107,10 @@ void parseInputFile(char* diskName, char* fName){
 			fileSys.shutdown();
 			
 			
-		}
-		
-		
+		}	
 		command_split.clear();
 	}
 }
-
-
-
 
 int main(int argc, char **argv){
 	
@@ -141,8 +133,8 @@ int main(int argc, char **argv){
         input4.open(argv[5], fstream::in);
     }
 */
-    parseInputFile(argv[1],argv[2]);
 	
+    parseInputFile(argv[1],argv[2]);
 	
 	return 0;
 
