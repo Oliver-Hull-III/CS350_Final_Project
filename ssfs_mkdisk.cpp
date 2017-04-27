@@ -131,7 +131,12 @@ int main(int argc, char** argv){
 	}
 	ofs.close();
 	ifs.seekg(0);
-	ifs.read(read_buf , sizeof(char));
+	int first_read;
+
+	Superblock blank;
+	ifs.read(reinterpret_cast<char*>(&blank),sizeof(Superblock));
+
+	cout << "Superblock has block number " << blank.numBlocks << endl;
 	
 	cout << "first char in file is " << read_buf[0] << endl;
 	

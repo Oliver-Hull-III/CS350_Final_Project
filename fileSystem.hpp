@@ -37,7 +37,7 @@ class fileSystem{
 	private:
 		std::vector<bool> freeBlockList;
 		std::vector<bool> freeiNodeList;	
-		std::vector<iNode> iNodeList;
+		//std::vector<iNode> iNodeList;
 	
 	
 };
