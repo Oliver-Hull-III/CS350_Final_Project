@@ -27,7 +27,7 @@ void split(string in, vector<string> out){
 	}
 
 }
-void parseInputFile(char* fName, fileSystem fileSys){
+void parseInputFile(char* diskName, char* fName){
 	
 	ifstream input;
         input.open(fName, fstream::in);
@@ -35,7 +35,7 @@ void parseInputFile(char* fName, fileSystem fileSys){
 	string command;
 	vector <string> command_split;
 	
-	
+	fileSystem fileSys(diskName);
 	
 	while(!input.eof()){
 		
@@ -126,7 +126,7 @@ int main(int argc, char **argv){
 
 	
 	//make fileSystem object
-	fileSystem fileSys(argv[1]);
+
 
 /*
     if(argc > 3){
@@ -141,7 +141,7 @@ int main(int argc, char **argv){
         input4.open(argv[5], fstream::in);
     }
 */
-    parseInputFile(argv[2],fileSys);
+    parseInputFile(argv[1],argv[2]);
 	
 	
 	return 0;

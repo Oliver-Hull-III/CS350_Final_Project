@@ -27,12 +27,19 @@ struct Superblock{
 
 fileSystem::fileSystem(string diskName){
 	ifstream ifs;	
-	ifs.open(diskName, ios::in);
-	Superblock sb;
+	ifs.open(diskName, ios::in | ios::binary);
 
-	ifs.read(reinterpret_cast<char*>(&sb),sizeof(Superblock));
+	Superblock blank;
 
-	if(sb.hasFiles){
+	ifs.read(reinterpret_cast<char*>(&blank),sizeof(Superblock));
+
+	cout << "reading from file, Superblock has numBlocks = " << blank.numBlocks << endl;
+	cout << "reading from file, Superblock has blockSize = " << blank.blockSize << endl;
+
+	
+	
+
+	if(blank.hasFiles){
 		//look through the disk and read data into our class
 	}
 }

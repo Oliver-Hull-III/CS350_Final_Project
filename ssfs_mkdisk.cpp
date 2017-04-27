@@ -76,8 +76,6 @@ int main(int argc, char** argv){
 	numBlocks = atoi(argv[1]);
 	blockSize = atoi(argv[2]);
 
-	string test1 = "end of file";
-	string test2 = "file  begins";
 	
 	// create a binary file that we can write output to	
 
@@ -91,32 +89,24 @@ int main(int argc, char** argv){
 	ofs.open(argv[3], std::ios::binary | std::ios::out);
 	ifs.open(argv[3], std::ios:: binary | std::ios::in);
 	
-	
-	
-	//maybe change to strings
 
-	Superblock sb;
-	
+	Superblock sb;	
 	sb.hasFiles = 0;
 	sb.numBlocks = numBlocks;
 	sb.blockSize = blockSize;
 	sb.offset = 258 * blockSize;
 
+	// write the entire superblock to the disk file
 	ofs.write(reinterpret_cast<char*>(&sb), sizeof(Superblock));
-
-	
-	
-	
-
-	// junk char array just holds a z, going to fill the disk file with a bunch of z's to start
 
 	char junk[1] = {'z'};
 	char junk_2[1] = {'x'};
 	char read_buf[1];
 	// fill entire file with the char z
 	
-	
-	
+	// this for loop seeks to the point right after the very 
+	// first block (which contains the superblock)
+	// and writes z's into the file
 	for (int i = blockSize; i < (numBlocks + 258) * blockSize; i++) {
 		if( i < (numBlocks * blockSize -1)) {
 			// fill whole file with z's
@@ -130,26 +120,15 @@ int main(int argc, char** argv){
 		}
 	}
 	ofs.close();
+
 	ifs.seekg(0);
-	int first_read;
 
-	Superblock blank;
-	ifs.read(reinterpret_cast<char*>(&blank),sizeof(Superblock));
+	//Superblock blank;
+	//ifs.read(reinterpret_cast<char*>(&blank),sizeof(Superblock));
 
-	cout << "Superblock has block number " << blank.numBlocks << endl;
+	//cout << "reading from file, Superblock has numBlocks = " << blank.numBlocks << endl;
+	//cout << "reading from file, Superblock has blockSize = " << blank.blockSize << endl;
 	
-	cout << "first char in file is " << read_buf[0] << endl;
-	
-	
-/*
-	ofs.seekp((numBlocks * blockSize) - 1);  
-	//ofs.write("", 1);
-	ofs.write(test1.c_str(), sizeof(test1));
-	ofs.seekp(0);
-
-	string number_string("1");	
-	ofs.write(number_string.c_str(), sizeof(int));
-*/
 	ofs.close();  
 
 
