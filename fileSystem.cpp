@@ -34,6 +34,8 @@ fileSystem::fileSystem(string diskName){
 
 	Superblock sb;
 
+	
+	//read is broken!!!!!!
 	diskIn.read(reinterpret_cast<char*>(&sb),sizeof(Superblock));
 
 	blockSize = sb.blockSize;
@@ -135,6 +137,7 @@ void fileSystem::import(string ssfsFName, string unixFName){
 		//read 1 block of data from unixFile
 		unixFile.read(toBeWritten,blockSize);
 	
+		cout<<toBeWritten<<endl;
 		
 		
 		//find free block in freeBlockList
@@ -144,6 +147,21 @@ void fileSystem::import(string ssfsFName, string unixFName){
 			if(freeBlockList[blockNum] == 0)
 				freeBlockList[blockNum] = 1;
 
+		
+		
+		
+		
+		//if blocksInFile == 12 we have to make an indirect block
+		if(blocksInFile == 12){
+			
+			iNodeList[iNodeIndex].indBlock = blockNum;
+			
+			//need to find another free block to actually write to
+			for(blockNum = 0; blockNum<numBlocks; blockNum++)
+				if(freeBlockList[blockNum] == 0)
+					freeBlockList[blockNum] = 1;
+			
+		}
 		
 		if(blocksInFile < 12){
 
@@ -159,8 +177,27 @@ void fileSystem::import(string ssfsFName, string unixFName){
 	
 	
 		}
+		/*
+		else if(blocksInFile < 24){
+			
+			// (iNodeList[iNodeIndex].indBlock * blockSize) is the address of the indBlock
+			// ((blockNum - 12) * sizeof(int)) is the offset into the indirect block
+			outFile.seekp(offset + (iNodeList[iNodeIndex].indBlock * blockSize) +((blockNum - 12)*sizeof(int)));
+			outFile.write(blockNum,sizeof(int));
+		
+			// TODO: ensure 12*sizeof(int) is less than the minimum block size
+
+			diskOut.seekp(offset + (blockNum * blockSize));
+			diskOut.write(toBeWritten,blockSize);
+			
+			
+			//TODO: update freeBlockList and iNode on disk
+
+			
+		}
+		*/
 		else{
-			//indirect block stuff
+			cout<<"too big"<<endl;
 		}
 	}
 	
@@ -168,6 +205,13 @@ void fileSystem::import(string ssfsFName, string unixFName){
 }
 
 void fileSystem::cat(string ssfsFName){
+	
+	int iNodeIndex;
+	for(iNodeIndex = 0; iNodeIndex<256; iNodeIndex++)
+		if(fileNameList[iNodeIndex] == ssfsFName)
+			break;
+	
+	
 	
 	
 }

@@ -116,8 +116,10 @@ int main(int argc, char** argv){
 
 	ofs.write(reinterpret_cast<char*>(&sb), sizeof(Superblock));
 
+
+	Superblock test;
 	
-	
+
 	
 
 	// junk char array just holds a z, going to fill the disk file with a bunch of z's to start
