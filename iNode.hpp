@@ -16,6 +16,8 @@ class iNode{
     public:
         iNode();
         iNode(int, int[12], int, int, char[32]);
+    char * getFileName();
+    void setFileName(char* fn);
     
     private:
 		// fileName is char arry of size 32 bytes, as specified in Program5 instructions
@@ -24,6 +26,7 @@ class iNode{
         int indBlock;
         int doubleIndBlock;
 		char fileName[32];
+    
 };
 
 
