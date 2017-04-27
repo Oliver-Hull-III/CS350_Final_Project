@@ -36,9 +36,6 @@ fileSystem::fileSystem(string diskName){
 	cout << "reading from file, Superblock has numBlocks = " << blank.numBlocks << endl;
 	cout << "reading from file, Superblock has blockSize = " << blank.blockSize << endl;
 
-	
-	
-
 	if(blank.hasFiles){
 		//look through the disk and read data into our class
 	}
