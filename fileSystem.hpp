@@ -50,7 +50,7 @@ class fileSystem{
 		std::ifstream diskIn;
 		std::ofstream diskOut;
 
-	
+		std::string fileNameList[256];
 	
 	
 		bool *freeBlockList;
